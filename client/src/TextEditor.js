@@ -23,6 +23,17 @@ export default function TextEditor() {
   useEffect(() => {
     if (socket == null || quill == null) return;
 
+    const interval = setInterval(() => {
+      socket.emit("save-document", quill.getContents());
+    }, 2000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [socket, quill]);
+  useEffect(() => {
+    if (socket == null || quill == null) return;
+
     socket.once("load-document", (document) => {
       quill.setContents(document);
       quill.enable();
