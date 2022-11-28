@@ -42,7 +42,7 @@ export default function TextEditor() {
     socket.emit("get-document", documentId);
   }, [socket, quill, documentId]);
   useEffect(() => {
-    const s = io("http://localhost:3001");
+    const s = io("https://meridiowordprocessorapi.onrender.com");
     setSocket(s);
 
     return () => {
